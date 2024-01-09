@@ -7,11 +7,7 @@ class UserProvider extends ChangeNotifier {
   final GoogleSignIn _googleSignIn;
   GoogleSignInAccount? _googleAccount;
 
-  UserProvider()
-      : _googleSignIn = GoogleSignIn(
-            scopes: ['email'],
-            clientId:
-                "168955661710-j93nk0tgq2m1koojchth7appdrgc8vkr.apps.googleusercontent.com");
+  UserProvider() : _googleSignIn = GoogleSignIn(scopes: ['email']);
 
   GoogleSignInAccount? get googleAccount => _googleAccount;
 
@@ -23,11 +19,8 @@ class UserProvider extends ChangeNotifier {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
           await googleUser!.authentication;
-      final response = await http.post(
-        Uri.parse('$baseUrl/auth/google/verify'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'idToken': googleAuth.idToken}),
-      );
+      final response = await http.get(Uri.parse('$baseUrl/auth/google/'),
+          headers: {'Content-Type': 'application/json'});
       print('response.body: ${response.body}');
       print('response.statusCode: ${response.statusCode}');
 
@@ -36,6 +29,7 @@ class UserProvider extends ChangeNotifier {
         final Map<String, dynamic> userData = jsonDecode(response.body);
         // You might want to store user data or perform additional processing
         // For example, updating local variables and notifying listeners
+        print(googleUser);
         print('User Data: $userData');
         _googleAccount = googleUser;
         notifyListeners();

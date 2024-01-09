@@ -23,7 +23,7 @@ class Google_Sign_In_Button extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 25 * fem),
+              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0 * fem),
               padding:
                   EdgeInsets.fromLTRB(69 * fem, 20 * fem, 66 * fem, 20 * fem),
               width: double.infinity,
